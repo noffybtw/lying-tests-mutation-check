@@ -1,0 +1,17 @@
+{
+  "name": "lying-tests-mutation-check",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Two tests that pass on broken code, their rewrites, and a mutation check",
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "mutate": "node scripts/mutate.mjs"
+  },
+  "devDependencies": {
+    "vitest": "5.1.1"
+  }
+}
