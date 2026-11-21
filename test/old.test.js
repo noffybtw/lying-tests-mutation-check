@@ -1,4 +1,4 @@
-// The original tests, unchanged. Both still pass after the two bugs described in the README.
+// The original tests, unchanged. Both still pass on code with the two bugs described in the README.
 import { it, expect, vi } from 'vitest';
 import { toClientView } from '../src/clientView.js';
 import { saveClient } from '../src/saveClient.js';

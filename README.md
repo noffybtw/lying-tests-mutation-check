@@ -26,23 +26,25 @@ it('saves client', async () => { await saveClient(c); expect(db.save).toHaveBeen
 `test/new.test.js`:
 
 - The fixture has a distinct value for every field, phone included (a made-up number).
-- Each expected object is written out in full and compared with `toStrictEqual`, which also fails when a property is present but `undefined`.
+- Each expected object is written out in full and compared with `toStrictEqual`, which, unlike `toEqual`, tells a missing property from one set to `undefined`.
 - `saveClient` takes the store as an optional second argument. The test passes an in-memory database (`src/db.js`), reads the record back and compares all of its fields.
 
 ## Mutation check
 
-`npm run mutate` makes each break in a fresh copy of `src/` and `test/` in the system temp directory and runs both suites against it:
+`npm run mutate` introduces each bug in a fresh copy of `src/` and `test/` in the system temp directory and runs both suites against it:
 
 | Mutation | Original tests | New tests |
 |---|---|---|
 | A: `toClientView` without `phone` | 2/2 pass | 1/2 fail |
 | B: `saveClient` without `name` | 2/2 pass | 1/2 fail |
 
-[MUTATION.md](MUTATION.md) holds the full vitest output of every run; the script rewrites it each time. [docs/mutation-check.png](docs/mutation-check.png) is the console output of the same run, rendered as an image. The script exits with code 1 if a mutation doesn't apply, if either suite fails on the unmodified code, or if a mutation leaves the new tests green or turns the original ones red.
+![Console output of npm run mutate](docs/mutation-check.png)
+
+[MUTATION.md](MUTATION.md) holds the full vitest output of the same run. The script rewrites it on every run and leaves its copies in the temp directory. It exits with code 1 if a mutation doesn't apply, if either suite fails on the unmodified code, or if a mutation leaves the new tests green or turns the original ones red.
 
 ## Running
 
-Needs Node.js 22.12+, 24 or 26+ (the versions vitest 5 supports).
+Needs Node.js 22 (22.12 or later), 24, or 26 and up (the versions vitest 5 supports).
 
 ```sh
 npm ci

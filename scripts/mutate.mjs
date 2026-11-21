@@ -1,5 +1,5 @@
-// Makes the two breaks described in the README and runs both test suites against each of them.
-// Every run works on its own copy of the project in the system temp directory; the repo is never modified.
+// Introduces the two bugs described in the README and runs both test suites against each of them.
+// Every run works on its own copy of the project in the system temp directory; the only file written in the repo is MUTATION.md.
 import { cpSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, dirname, join } from 'node:path';
@@ -101,7 +101,7 @@ function failures(output) {
 function summary(r) {
   if (r.verdict === 'pass') return `${r.passed}/${r.total} pass`;
   if (r.verdict === 'fail') return `${r.failed}/${r.total} fail`;
-  return `exit ${r.exit}, ${r.failed}/${r.total} fail`;
+  return r.total === 0 ? `exit ${r.exit}, no tests ran` : `exit ${r.exit}, ${r.failed}/${r.total} fail`;
 }
 
 console.log(styleText('bold', 'Mutation check: the unmodified code and two mutations, both suites on each'));
@@ -143,9 +143,10 @@ const md = [
   }),
   '',
   'Each run copies `package.json`, `src/` and `test/` to a temporary directory, and a mutation removes one line from the copy. The full vitest output of every suite follows.',
+  '',
 ];
 for (const { run, removed, suiteResults } of results) {
-  md.push('', `## ${run.id}. ${run.title}`, '');
+  md.push(`## ${run.id}. ${run.title}`, '');
   if (removed) md.push(`Mutation in \`${run.file}\`:`, '', '```diff', `-${removed}`, '```', '');
   for (const r of suiteResults) {
     md.push(`### ${r.suite.heading} (\`${r.suite.file}\`)`, '', '```text', r.output, '```', '');

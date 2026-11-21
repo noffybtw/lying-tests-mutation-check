@@ -13,29 +13,28 @@ Each run copies `package.json`, `src/` and `test/` to a temporary directory, and
 ### Original tests (`test/old.test.js`)
 
 ```text
-RUN  v5.1.1 /tmp/mutation-0-jtKADj
+RUN  v5.1.1 /tmp/mutation-0-KAQMKO
 
- ✓ test/old.test.js (2 tests) 9ms
+ ✓ test/old.test.js (2 tests) 8ms
 
  Test Files  1 passed (1)
       Tests  2 passed (2)
-   Start at  17:13:38
-   Duration  433ms (transform 68%, import 23%, tests 4%, worker 4%)
+   Start at  17:24:58
+   Duration  404ms (transform 62%, import 27%, tests 6%, worker 5%)
 ```
 
 ### New tests (`test/new.test.js`)
 
 ```text
-RUN  v5.1.1 /tmp/mutation-0-jtKADj
+RUN  v5.1.1 /tmp/mutation-0-KAQMKO
 
- ✓ test/new.test.js (2 tests) 8ms
+ ✓ test/new.test.js (2 tests) 18ms
 
  Test Files  1 passed (1)
       Tests  2 passed (2)
-   Start at  17:13:39
-   Duration  355ms (transform 63%, import 28%, tests 5%, worker 4%)
+   Start at  17:24:59
+   Duration  350ms (transform 58%, import 22%, tests 13%, worker 7%)
 ```
-
 
 ## A. toClientView no longer returns phone
 
@@ -48,31 +47,31 @@ Mutation in `src/clientView.js`:
 ### Original tests (`test/old.test.js`)
 
 ```text
-RUN  v5.1.1 /tmp/mutation-A-aTUbab
+RUN  v5.1.1 /tmp/mutation-A-ZHhJ5e
 
- ✓ test/old.test.js (2 tests) 8ms
+ ✓ test/old.test.js (2 tests) 19ms
 
  Test Files  1 passed (1)
       Tests  2 passed (2)
-   Start at  17:13:40
-   Duration  423ms (transform 69%, import 21%, worker 6%, tests 4%)
+   Start at  17:25:00
+   Duration  711ms (transform 71%, import 15%, worker 7%, tests 7%)
 ```
 
 ### New tests (`test/new.test.js`)
 
 ```text
-RUN  v5.1.1 /tmp/mutation-A-aTUbab
+RUN  v5.1.1 /tmp/mutation-A-ZHhJ5e
 
- ❯ test/new.test.js (2 tests | 1 failed) 22ms
+ ❯ test/new.test.js (2 tests | 1 failed) 33ms
    ❯ toClientView (1)
-     × returns the id, name and phone 18ms
+     × returns the id, name and phone 22ms
    ✓ saveClient (1)
-     ✓ saves the id, name and phone 1ms
+     ✓ saves the id, name and phone 3ms
 
  Test Files  1 failed (1)
       Tests  1 failed | 1 passed (2)
-   Start at  17:13:41
-   Duration  436ms (transform 64%, import 20%, tests 12%, worker 4%)
+   Start at  17:25:02
+   Duration  570ms (transform 51%, import 25%, tests 20%, worker 5%)
 
 
 ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
@@ -100,7 +99,6 @@ AssertionError: expected { id: 'c-42', name: 'Olena Koval' } to strictly equal {
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
 ```
 
-
 ## B. saveClient no longer saves name
 
 Mutation in `src/saveClient.js`:
@@ -112,31 +110,31 @@ Mutation in `src/saveClient.js`:
 ### Original tests (`test/old.test.js`)
 
 ```text
-RUN  v5.1.1 /tmp/mutation-B-yg4V0w
+RUN  v5.1.1 /tmp/mutation-B-BRAer5
 
- ✓ test/old.test.js (2 tests) 7ms
+ ✓ test/old.test.js (2 tests) 12ms
 
  Test Files  1 passed (1)
       Tests  2 passed (2)
-   Start at  17:13:42
-   Duration  399ms (transform 73%, import 20%, worker 4%, tests 4%)
+   Start at  17:25:04
+   Duration  456ms (transform 69%, import 23%, tests 5%, worker 3%)
 ```
 
 ### New tests (`test/new.test.js`)
 
 ```text
-RUN  v5.1.1 /tmp/mutation-B-yg4V0w
+RUN  v5.1.1 /tmp/mutation-B-BRAer5
 
- ❯ test/new.test.js (2 tests | 1 failed) 21ms
+ ❯ test/new.test.js (2 tests | 1 failed) 31ms
    ✓ toClientView (1)
-     ✓ returns the id, name and phone 4ms
+     ✓ returns the id, name and phone 6ms
    ❯ saveClient (1)
-     × saves the id, name and phone 13ms
+     × saves the id, name and phone 19ms
 
  Test Files  1 failed (1)
       Tests  1 failed | 1 passed (2)
-   Start at  17:13:43
-   Duration  392ms (transform 58%, import 26%, tests 11%, worker 5%)
+   Start at  17:25:05
+   Duration  558ms (transform 64%, import 18%, tests 14%, worker 4%)
 
 
 ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
